@@ -13,7 +13,7 @@ export default class Navbar extends Component {
                     <a className="navbar-brand" href="#">
                         AQUIRE TOOLS
                         <h6 className='text-white'>
-                            for Monobank Aquiring
+                            for Wialon
                         </h6>
                     </a>
 
