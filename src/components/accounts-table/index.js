@@ -1,3 +1,3 @@
-import AccountTable from './accounts-table';
+import AccountsTable from './accounts-table';
 
-export default AccountTable;
+export default AccountsTable;
