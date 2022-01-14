@@ -7,23 +7,20 @@ export default class AccountsTable extends Component {
 
     render() {
         return (
-            <div className='col-sm-12 mb-3 center-block'>
-                <table className="accounts-table table-sm table-hover" id='basketOrder'>
+            <div className=''>
+                <table className="accounts-table table table-hover" id='basketOrder'>
                     <thead className='text-white'>
                     <tr className="table-primary">
                         <th scope="col">#</th>
                         <th scope="col">ID</th>
                         <th scope="col">Name</th>
-                        <th scope="col">Sum</th>
-                        <th scope="col">Icon</th>
-                        <th scope="col">----</th>
-                        <th scope="col">----</th>
-                        <th scope="col">----</th>
-                        <th scope="col">----</th>
-                        <th scope="col">----</th>
+                        <th scope="col">Days</th>
+                        <th scope="col">Enabled</th>
+                        <th scope="col">Units</th>
+                        <th scope="col">Parent Acc</th>
                         <th scope="col">
                             <a>
-                                <i className="btn btn-sm btn-success fa fa-plus"/>
+                                <i className="btn btn-sm btn-info fa fa-refresh"/>
                             </a>
                         </th>
                     </tr>

@@ -7,7 +7,7 @@ import './app.css';
 
 const App = () => {
     return (
-        <div>
+        <div className=''>
             <Navbar />
             <AccountsTable />
         </div>
