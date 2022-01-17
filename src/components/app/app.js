@@ -5,31 +5,49 @@ import AccountsTable from "../accounts-table";
 
 import './app.css';
 
+/* global wialon */
+
+
+function msg(msg) {
+    console.log(msg);
+}
+
 class App extends Component {
 
-    componentDidMount() {
-        const scr = document.createElement("script");
-        scr.async = true;
-        scr.src = "https://hst-api.wialon.com/wsdk/script/wialon.js";
-        scr.onload = () => this.scriptLoaded();
-
-        document.head.appendChild(scr);
+    constructor() {
+        super();
+        this.state = {
+            token: "",
+            baseUrl: "",
+            isAuthorized: false,
+            units: []
+        }
     }
 
-    scriptLoaded() {
-        
+    componentDidMount() {
+        const token = this.state.token;
+        wialon.core.Session.getInstance().initSession(this.state.baseUrl);
+        wialon.core.Session.getInstance().loginToken(token, "",
+            code => {
+                if (code) {
+                    msg(wialon.core.Errors.getErrorText(code));
+                    return;
+                }
+                msg("Logged successfully");
+                this.setState({isAuthorized: true});
+            }
+        );
     }
 
     render() {
         return (
             <div className=''>
-                <Navbar />
-                <AccountsTable />
+                <Navbar/>
+                <AccountsTable/>
             </div>
         );
     }
 
-
-};
+}
 
 export default App;
