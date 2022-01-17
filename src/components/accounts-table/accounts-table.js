@@ -3,13 +3,32 @@ import React, {Component} from 'react';
 import './accounts-table.css';
 import AccountsTableRow from "../accounts-table-row";
 
+/* global wialon */
+
 export default class AccountsTable extends Component {
 
     constructor() {
         super();
         this.state = {
-
+            dataFlags: null
         }
+    }
+
+    componentDidMount() {
+        // let sess = wialon.core.Session.getInstance()
+        // sess.loadLibrary("resourceAccounts")
+        // let flags = wialon.item.Item.dataFlag.base | wialon.item.Item.dataFlag.billingProps;
+        // sess.updateDataFlags(
+        //     [{ type: "type", data: "avl_resource", flags: flags, mode: 0 }],
+        //     (code, data) => {
+        //         if (code) {
+        //             console.log(wialon.core.Errors.getErrorText(code));
+        //             return;
+        //         }
+        //         console.log(data)
+        //         this.setState({dataFlags: flags});
+        //     }
+        // )
     }
 
     render() {

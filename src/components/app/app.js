@@ -9,9 +9,15 @@ import configData from '../../config.json'
 
 /* global wialon */
 
-function msg(msg) {
-    console.log(msg);
+
+class Account {
+    constructor(res, data) {
+        this._id = res._id
+        this.res = res
+        this.data = data
+    }
 }
+
 
 class App extends Component {
 
@@ -20,7 +26,8 @@ class App extends Component {
         this.state = {
             token: configData.token,
             baseUrl: configData.baseUrl,
-            isAuthorized: false
+            isAuthorized: false,
+            accounts: []
         }
     }
 
@@ -31,20 +38,58 @@ class App extends Component {
         wialon.core.Session.getInstance().loginToken(token, "",
             code => {
                 if (code) {
-                    msg(wialon.core.Errors.getErrorText(code));
+                    console.log(wialon.core.Errors.getErrorText(code));
                     return;
                 }
-                msg("Logged successfully");
+                console.log("Logged successfully");
                 this.setState({isAuthorized: true});
+                this.init()
             }
         );
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+
+
+    }
+
+    init() {
+        if (this.state.isAuthorized) {
+            let sess = wialon.core.Session.getInstance()
+            sess.loadLibrary("resourceAccounts")
+            let flags = wialon.item.Item.dataFlag.base | wialon.item.Item.dataFlag.billingProps;
+            sess.updateDataFlags(
+                [{type: "type", data: "avl_resource", flags: flags, mode: 0}],
+                (code) => {
+                    if (code) {
+                        console.log(wialon.core.Errors.getErrorText(code));
+                        return;
+                    }
+                    console.log('Data flags updated')
+                    let resources = sess.getItems("avl_resource");
+                    let accounts = resources.filter((r) => r.$$user_accountId === r._id)
+                    let accs = accounts.map(e => e._id)
+                    sess.getAccountsData(accs, 1, (code, data) => {
+                        if (code) {
+                            console.log(wialon.core.Errors.getErrorText(code));
+                            return;
+                        }
+                        let fullAccountsData = accounts.map((e) => {
+                            return new Account(e, data[e._id])
+                        })
+                        console.log(fullAccountsData)
+                        this.setState({ accounts: fullAccountsData })
+                    })
+                }
+            );
+        }
     }
 
     render() {
         return (
             <div className=''>
-                <Navbar/>
-                <AccountsTable/>
+                <Navbar />
+                <AccountsTable />
             </div>
         );
     }
