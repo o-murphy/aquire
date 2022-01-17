@@ -5,8 +5,9 @@ import AccountsTable from "../accounts-table";
 
 import './app.css';
 
-/* global wialon */
+import configData from '../../config.json'
 
+/* global wialon */
 
 function msg(msg) {
     console.log(msg);
@@ -17,16 +18,16 @@ class App extends Component {
     constructor() {
         super();
         this.state = {
-            token: "",
-            baseUrl: "",
-            isAuthorized: false,
-            units: []
+            token: configData.token,
+            baseUrl: configData.baseUrl,
+            isAuthorized: false
         }
     }
 
     componentDidMount() {
         const token = this.state.token;
-        wialon.core.Session.getInstance().initSession(this.state.baseUrl);
+        const baseUrl = this.state.baseUrl
+        wialon.core.Session.getInstance().initSession(baseUrl);
         wialon.core.Session.getInstance().loginToken(token, "",
             code => {
                 if (code) {

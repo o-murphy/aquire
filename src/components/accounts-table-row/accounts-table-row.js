@@ -5,6 +5,12 @@ import './accounts-table-row.css'
 
 export default class AccountsTableRow extends Component {
 
+    constructor() {
+        super();
+        this.state = {
+
+        }
+    }
 
     render() {
         return (

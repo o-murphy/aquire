@@ -5,6 +5,13 @@ import AccountsTableRow from "../accounts-table-row";
 
 export default class AccountsTable extends Component {
 
+    constructor() {
+        super();
+        this.state = {
+
+        }
+    }
+
     render() {
         return (
             <div className=''>
