@@ -21,8 +21,8 @@ class Account {
 
 class App extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             token: configData.token,
             baseUrl: configData.baseUrl,
@@ -86,10 +86,11 @@ class App extends Component {
     }
 
     render() {
+        const { accounts } = this.state;
         return (
             <div className=''>
                 <Navbar />
-                <AccountsTable />
+                <AccountsTable accounts={accounts}/>
             </div>
         );
     }

@@ -5,8 +5,8 @@ import './accounts-table-row.css'
 
 export default class AccountsTableRow extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
 
         }
